@@ -1,0 +1,26 @@
+<div class="todo-item" [class.completed]="todo.completed">
+  <div class="todo-content">
+    <input
+      type="checkbox"
+      [checked]="todo.completed"
+      (change)="onToggle.emit(todo.id)"
+      class="todo-checkbox"
+    />
+    <div class="todo-text">
+      <h3 [class.completed-title]="todo.completed">{{ todo.title }}</h3>
+      <p *ngIf="todo.description" class="todo-description">
+        {{ todo.description }}
+      </p>
+    </div>
+  </div>
+  <div class="todo-actions">
+    <app-button
+      variant="danger"
+      size="small"
+      (buttonClick)="onDelete.emit(todo.id)"
+    >
+      Delete
+    </app-button>
+  </div>
+</div>
+

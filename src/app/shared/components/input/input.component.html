@@ -1,0 +1,13 @@
+<div class="input-wrapper">
+  <label *ngIf="label" [for]="id">{{ label }}</label>
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  />
+</div>
+

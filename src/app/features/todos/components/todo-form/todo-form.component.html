@@ -1,0 +1,30 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()" class="todo-form">
+  <app-input
+    id="title"
+    label="Title"
+    formControlName="title"
+    placeholder="Enter todo title"
+  ></app-input>
+  <app-input
+    id="description"
+    label="Description (optional)"
+    formControlName="description"
+    placeholder="Enter todo description"
+  ></app-input>
+  <div class="form-actions">
+    <app-button
+      type="submit"
+      [disabled]="todoForm.invalid"
+    >
+      Add Todo
+    </app-button>
+    <app-button
+      type="button"
+      variant="secondary"
+      (buttonClick)="onCancel.emit()"
+    >
+      Cancel
+    </app-button>
+  </div>
+</form>
+

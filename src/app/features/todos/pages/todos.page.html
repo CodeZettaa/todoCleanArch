@@ -1,0 +1,66 @@
+<div class="todos-page">
+  <header class="page-header">
+    <h1>Todo App</h1>
+    <p class="subtitle">Clean Architecture Example</p>
+  </header>
+
+  <div class="todos-container">
+    <!-- Error Display -->
+    <div *ngIf="stateService.error()" class="error-message">
+      <p>{{ stateService.error() }}</p>
+      <app-button
+        variant="secondary"
+        size="small"
+        (buttonClick)="stateService.clearError()"
+      >
+        Dismiss
+      </app-button>
+    </div>
+
+    <!-- Add Todo Button -->
+    <div class="add-todo-section">
+      <app-button (buttonClick)="showForm.set(true)">
+        + Add New Todo
+      </app-button>
+    </div>
+
+    <!-- Todo Form Modal -->
+    <app-modal
+      [isOpen]="showForm()"
+      title="Create New Todo"
+      (close)="onModalClose()"
+    >
+      <app-todo-form
+        #todoForm
+        (onSubmitTodo)="onCreateTodo($event)"
+        (onCancel)="onModalClose()"
+      ></app-todo-form>
+    </app-modal>
+
+    <!-- Filters -->
+    <app-todo-filters
+      [currentFilter]="currentFilter()"
+      (onFilterChange)="currentFilter.set($event)"
+    ></app-todo-filters>
+
+    <!-- Todo List -->
+    <app-todo-list
+      [todos]="stateService.todos()"
+      [filter]="currentFilter()"
+      [loading]="stateService.loading()"
+      [emptyMessage]="getEmptyMessage()"
+      (onToggle)="onToggleTodo($event)"
+      (onDelete)="onDeleteTodo($event)"
+    ></app-todo-list>
+
+    <!-- Stats -->
+    <div class="stats">
+      <p>
+        Total: {{ stateService.todos().length }} |
+        Active: {{ stateService.activeTodos().length }} |
+        Completed: {{ stateService.completedTodos().length }}
+      </p>
+    </div>
+  </div>
+</div>
+

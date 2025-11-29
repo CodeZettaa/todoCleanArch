@@ -1,0 +1,11 @@
+<div class="filters">
+  <button
+    *ngFor="let filter of filters"
+    [class.active]="currentFilter === filter"
+    (click)="onFilterChange.emit(filter)"
+    class="filter-button"
+  >
+    {{ filter | titlecase }}
+  </button>
+</div>
+
